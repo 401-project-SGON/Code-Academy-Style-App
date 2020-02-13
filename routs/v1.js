@@ -4,7 +4,7 @@ const basicAuth = require('../middleware/basic-auth.js');
 const oauth = require('../middleware/oauth.js');
 const User = require('../users.js');
 const mongoose = require('mongoose')
-
+const Quastion = require('../models/qModel')
 // let bearerAuth = require('../middleware/bearer-auth-middleware.js');
 
 // eslint-disable-next-line new-cap
@@ -41,39 +41,80 @@ router.get('/users', basicAuth, (req, res) => {
 let data= require('../data/data.json')
 
 
-function getModel(req, res, next) {
-  let model = req.params.model;
+// function getModel(req, res, next) {
+//   let model = req.params.model;
 
-  switch(model) {
-  case 'categories':
-    req.model = categories;
-    next();
-    return;
-  case 'products':
-    req.model = products;
-    next();
-    return;
-  default:
-    next('invalid model');
-    return;
-  }
-}
-
-router.param('model', getModel);
-
-router.get('/data/:cName/:level/:q',(req,res)=>{
-
-  // dir= req.params
-//   console.log('dir : ', dir);
-// if(dir.cName.level.q){
-//   data3 = data.courses.cName.level.q
+//   switch(model) {
+//   case 'categories':
+//     req.model = categories;
+//     next();
+//     return;
+//   case 'products':
+//     req.model = products;
+//     next();
+//     return;
+//   default:
+//     next('invalid model');
+//     return;
+//   }
 // }
-let a = req.params.cName
-  console.log('a : ', a);
-  console.log('data.courses.a : ', data.courses.a);
-  res.status(200).json(data.courses.a)
+
+// router.param('model', getModel);
+
+
+
+router.get('/data',(req,res)=>{
+
+  let question = {question:"what is js?",answer:"i dont know"}
+
+Quastion.create(question).then(data=>{
+  console.log('data : ', data);
+})
+  let q = Quastion.get().then(data=>{
+    console.log('data : ', data);
+  })
+  console.log('q : ', q);
+  res.status(200).json(data)
+})
+router.get('/data/:course',(req,res)=>{
+
+  let a = req.params.course
+  
+  res.status(200).json(data.courses[a])
 })
 
+router.get('/data/:course/:level',(req,res)=>{
+  console.log('req.params : ', req.params);
+
+  let b = req.params.course
+
+  let a = req.params.level
+  
+  res.status(200).json(data.courses[b][a])
+})
+
+router.get('/data/:course/:level/:q',(req,res)=>{
+  console.log('req.params : ', req.params);
+
+  let c = req.params.q
+  let b = req.params.course
+
+  let a = req.params.level
+  
+  res.status(200).json(data.courses[b][a][c])
+})
+
+router.get('/data/:course/:level/:q/:n',(req,res)=>{
+  console.log('req.params : ', req.params);
+
+  let d = req.params.n
+  let c = req.params.q
+  let b = req.params.course
+
+  let a = req.params.level
+  
+  res.status(200).json(data.courses[b][a][c][d])
+})
 // router.get('/oauth', oauth ,(req, res) => {
 //   res.status(200).send(req.token);
 
