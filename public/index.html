@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>my app</h1>
+    <a id="ltuc" href="">log in </a>
+</body>
+<script>
+    let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
+    let options = {
+        scope: 'https://mail.google.com',
+        access_type: 'offline',
+        include_granted_scopes: true,
+        state: 'state_parameter_passthrough_value',
+        redirect_uri: 'http://localhost',
+        response_type: 'code',
+        client_id:'11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com'
+    }
+    let QueryString = Object.keys(options).map((key) => {
+        return `${key}=` + encodeURIComponent(options[key]);
+    }).join('&');
+    console.log('naseem', QueryString)
+    let authURL = `${URL}?${QueryString}`;
+    console.log('hima', authURL)
+    let link = document.getElementById('ltuc');
+    link.setAttribute('href', authURL);
+</script>
+
+</html>

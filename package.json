@@ -1,0 +1,44 @@
+{
+  "name": "code-academy-style-app",
+  "version": "1.0.0",
+  "description": "401 Midterm Project :)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "lint": "eslint '**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/401-project-SGON/Code-Academy-Style-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/401-project-SGON/Code-Academy-Style-App/issues"
+  },
+  "homepage": "https://github.com/401-project-SGON/Code-Academy-Style-App#readme",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "googleapis": "^47.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.2",
+    "mongodb-memory-server": "^6.2.4",
+    "mongoose": "^5.8.11",
+    "mongoose-schema-jsonschema": "^1.2.1",
+    "morgan": "^1.9.1",
+    "require-directory": "^2.1.1",
+    "superagent": "^5.2.1",
+    "supertest": "^4.0.2",
+    "swagger-ui-express": "^4.1.3"
+  }
+}
