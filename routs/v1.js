@@ -1,7 +1,7 @@
 const express = require('express');
 
-const basicAuth = require('../middleware/basic-auth.js');
-const oauth = require('../middleware/oauth.js');
+const auth = require('../middleware/auth.js');
+// const oauth = require('../middleware/oauth/oauth.js');
 const User = require('../users.js');
 const mongoose = require('mongoose')
 const Quastion = require('../models/qModel')
@@ -25,14 +25,14 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.post('/signin', basicAuth ,(req, res) => {
+router.post('/signin', auth ,(req, res) => {
 
   // creat token and append to req by basicAuth middleware
 
   res.status(200).json(req.token);
 });
 
-router.get('/users', basicAuth, (req, res) => {
+router.get('/users', auth, (req, res) => {
 
   // show all users from database
   User.find().then(data=>{
@@ -42,65 +42,8 @@ router.get('/users', basicAuth, (req, res) => {
 
 });
 
+// json file
 let data= require('../data/data.json')
-
-
-
-
-// router.get('/data',(req,res)=>{
-
-//   let question = {question:"what is js?",answer:"i dont know"}
-
-// Quastion.create(question).then(data=>{
-//   console.log('data : ', data);
-// })
-//   let q = Quastion.get().then(data=>{
-//     console.log('data : ', data);
-//   })
-//   console.log('q : ', q);
-//   res.status(200).json(data)
-// })
-
-router.get('/data/:course',(req,res)=>{
-
-  let a = req.params.course
-  
-  res.status(200).json(data.courses[a])
-})
-
-router.get('/data/:course/:level',(req,res)=>{
-  console.log('req.params : ', req.params);
-
-  let b = req.params.course
-
-  let a = req.params.level
-  
-  res.status(200).json(data.courses[b][a])
-})
-
-router.get('/data/:course/:level/:q',(req,res)=>{
-  console.log('req.params : ', req.params);
-
-  let c = req.params.q
-  let b = req.params.course
-
-  let a = req.params.level
-  
-  res.status(200).json(data.courses[b][a][c])
-})
-
-router.get('/data/:course/:level/:q/:n',(req,res)=>{
-  console.log('req.params : ', req.params);
-
-  let d = req.params.n
-  let c = req.params.q
-  let b = req.params.course
-
-  let a = req.params.level
-  
-  res.status(200).json(data.courses[b][a][c][d])
-})
-
 
 
 router.post('/addCourse',(req,res)=>{
@@ -149,8 +92,6 @@ router.get('/showL',(req,res)=>{
 })
 
 
-
-
 function getModel(req, res, next) {
   let model = req.params.model;
 
@@ -178,7 +119,7 @@ router.param('model', getModel);
 
 router.get('/:model/:id',getOne)
 router.get('/:model',getAll)
-router.post('/:model',create)
+router.post('/:model',auth('create'),create)
 router.put('/:model/:id',update)
 router.delete('/:model/:id',deleteOne)
 
@@ -220,7 +161,6 @@ function deleteOne(req,res,next){
   })
 
 }
-
 
 
 

@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+require('./roles.js')
 dotenv.config();
 
 const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
+  role: {type: String, default:'user', enum: ['admin','editor','user']},
 
 });
 
@@ -18,6 +20,11 @@ users.pre('save', async function() {
 });
 
 
+const capabilities = {
+  admin: ['create','read','update','delete'],
+  editor: ['create', 'read', 'update'],
+  user: ['read'],
+};
 
 users.statics.authenticateBasic = function(user, pass) {
   let query = {username:user};
@@ -35,10 +42,16 @@ users.statics.generateToken = function(user) {
 
 // note that token expire in 15 min 
 
-  let token = jwt.sign({ username: user.username}, process.env.SECRET, { expiresIn: 60 * 15});
-  console.log('token genrated: ', token);
+let userSecInfo = {
+  username: user.username,
+  capabilities: capabilities[user.role],
+};
 
-  return token;
+let token = jwt.sign(userSecInfo , process.env.SECRET);
+console.log('token genrated: ', token);
+
+
+return token;
 };
 
 users.statics.verifyToken = async function(token) {
@@ -47,6 +60,12 @@ users.statics.verifyToken = async function(token) {
   console.log('tokenObject : ',tokenObject );
   return this.findOne({username:tokenObject.username});
 
+};
+
+
+users.methods.can = function(capability) {
+  console.log('capability : ',capability );
+  return capabilities[this.role].includes(capability);
 };
 
 module.exports = mongoose.model('users', users);
