@@ -8,7 +8,11 @@ const User = require('../users.js');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+router.get('/', test);
 
+function test(req,res) {
+  res.status(200).send('works');
+}
 router.post('/signup', (req, res) => {
   new User(req.body).save()
     .then(userIn => {
@@ -29,11 +33,11 @@ router.get('/users', basicAuth, (req, res) => {
 
 router.get('/oauth',(req, res,next) => {
   console.log('v1.js');
-  oauth.authorize(req)
-    .then( token => {
-      res.status(200).send(token);
-    })
-    .catch(next);
+  // oauth.authorize(req)
+    // .then( token => {
+      res.status(200).send('naseem');
+    // })
+    // .catch(next);
 });
 
 // router.get('/secret', bearerAuth, (req, res) => {

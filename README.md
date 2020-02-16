@@ -69,8 +69,8 @@ nodemon index.js
 
 ## Authors
 - Nassem Izzat
-- Obada Quran
 - Gorob Ahamad
+- Obada Quran
 - Sohad Qtitat
 
 ------------------------------
