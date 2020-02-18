@@ -6,36 +6,18 @@ const mongoose = require('mongoose')
 const Quastion = require('../models/qModel')
 const Course = require('../models/course-model.js') 
 const Level = require('../models/level-model.js') 
+const chatServer = require('../lib/chat-server.js')
 
-// socket 
-
-
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
-
-app.get('/', function(req, res){
-  res.sendFile("/mnt/c/Users/std15/ltuc/401-ltuc/project2/Code-Academy-Style-App/" + 'public/index.html');
-});
-
-io.on('connection', function(socket){
-  console.log('new user : ', socket.id);
-  socket.on('chat message', function(msg){
-    console.log('msg : ', msg);
-    io.emit('chat message', msg);
-  });
-});
-
-http.listen(port, function(){
-  console.log('listening on *:' + port);
-});
 
 
 
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
+
+router.get('/chat',(req,res)=>{
+  chatServer.start(process.env.PORT2)
+})
 
 // auth routes 
 router.post('/signup', (req, res) => {
