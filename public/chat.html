@@ -81,7 +81,8 @@
                 return false;
             });
             $('select').on('change', function () {
-                let room = this.value;
+                
+                room= this.value
                 socket.emit('join',room)
             }); socket.on('chat message', function (msg) {
                 $('#messages').append($('<li>').text(msg));
