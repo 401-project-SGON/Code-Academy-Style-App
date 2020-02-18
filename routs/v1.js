@@ -6,18 +6,18 @@ const mongoose = require('mongoose')
 const Quastion = require('../models/qModel')
 const Course = require('../models/course-model.js') 
 const Level = require('../models/level-model.js') 
-const chatServer = require('../lib/chat-server.js')
-
-
-
 
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/chat',(req,res)=>{
-  chatServer.start(process.env.PORT2)
-})
+
+//
+router.get('/data', (req, res) => {
+  
+     res.status(200).json({ "message": 'Hello World' });
+
+});
 
 // auth routes 
 router.post('/signup', (req, res) => {
