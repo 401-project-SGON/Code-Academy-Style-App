@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>POWER CODE</h1>
+ 
+<footer>
+  <div style="margin: 0px 0px 0px 0px; ">
+    <iframe  src="http://192.168.1.101:3001" width="500px" frameborder="0"></iframe>
+    </div>
+</footer>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script>
+    $.ajax({
+      url: '/data',
+      complete: function(data) {
+        console.log(data);
+      }
+    });</script>
+</body>
+
+</html>
