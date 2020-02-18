@@ -139,7 +139,7 @@ get response example from our swagger application
 ```
 ***
 
-## CURD 
+## CRUD 
 
 ### Create:POST
 
