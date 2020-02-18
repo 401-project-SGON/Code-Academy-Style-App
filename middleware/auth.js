@@ -54,8 +54,8 @@ module.exports = (capability) => {
       }
     }
 
-    function errorAuth(e) {
-      next(e);
+    function errorAuth() {
+      next({ status: 401, statusMessage: 'Unauthorized', message: 'Invalid User ID/Password' });
     }
 
   };

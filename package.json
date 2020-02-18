@@ -7,7 +7,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "lint": "eslint **/*.js",
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,10 +28,12 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^6.2.4",
     "morgan": "^1.9.1",
     "superagent": "^5.2.1",
-    "supergoose": "^0.2.6"
+    "supergoose": "^0.2.6",
+    "supertest": "^4.0.2"
   }
 }
