@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', test);
 
-function test(req,res) {
+function test(req, res) {
   res.status(200).send('works');
 }
 router.post('/signup', (req, res) => {
@@ -21,23 +21,24 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.post('/signin', basicAuth ,(req, res) => {
+router.post('/signin', basicAuth, (req, res) => {
   res.status(200).json(req.token);
 });
 
 router.get('/users', basicAuth, (req, res) => {
-  User.find().then(data=>{
+  User.find().then(data => {
     res.status(200).json(data);
   });
 });
 
-router.get('/oauth',(req, res,next) => {
+// eslint-disable-next-line no-unused-vars
+router.get('/oauth', (req, res, next) => {
   console.log('v1.js');
-  // oauth.authorize(req)
-    // .then( token => {
-      res.status(200).send('naseem');
-    // })
-    // .catch(next);
+  oauth.authorize(req)
+    .then(token => {
+      res.status(200).send(token);
+    })
+    .catch(next);
 });
 
 // router.get('/secret', bearerAuth, (req, res) => {

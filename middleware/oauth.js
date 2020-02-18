@@ -7,12 +7,12 @@ const Users = require('../users.js');
 require('dotenv').config();
 
 const authorize = (req) => {
-  let code = req.query.code || '4/wgGE_Iwj3LaUfdQ89ICGwHnSAoKU53Iv0tIV3Pf90ZnPTv_urQx5VU4Egg_A8oIW9xTNtZPqmHelFLC5KrM6efo';
+  let code = req.query.code;
   console.log('(1) CODE:', code);
 
-  return superagent.post('https://www.googleapis.com/oauth2/v4/token')
+  return superagent.post('https://www.googleapis.com/oauth2/v4/token') // this url from google documentation .post to send request
     .type('form')
-    .send({
+    .send({ // headers of the request
       code: code,
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIEN_SECRET,
@@ -20,13 +20,12 @@ const authorize = (req) => {
       grant_type: 'authorization_code',
     })
     .then( response => {
-      let access_token = response.body.access_token;
-      console.log('(2) ACCESS TOKEN:', access_token);
-      return access_token;
+      let id_token = response.body.id_token;
+      console.log('(2) ACCESS TOKEN:', response.body);
+      return id_token;
     })
     .then(token => {
-      return superagent.get('https://www.googleapis.com/plus/v1/people/me/openIdConnect')
-        .set('Authorization', `Bearer ${token}`)
+      return superagent.post(`https://www.googleapis.com/oauth2/v1/tokeninfo?id_token=${token}`)
         .then( response => {
           let user = response.body;
           user.access_token = token;
@@ -36,15 +35,13 @@ const authorize = (req) => {
     })
     .then(oauthUser => {
       console.log('(4) CREATE ACCOUNT');
-      return Users.createFromOAuth(oauthUser);
+      return Users.createFromOauth(oauthUser.email);
     })
     .then(actualRealUser => {
       console.log('(5) ALMOST ...', actualRealUser);
-      return actualRealUser.generateToken();
+      return actualRealUser.generateToken(actualRealUser.email);
     })
-    .catch(error => error);
-
-
+    .catch(error => console.error(error));
 };
 
 module.exports = {authorize};
