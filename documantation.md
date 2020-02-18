@@ -10,6 +10,8 @@ The web application consists of back end was written in js using Visual Studio C
 
 This REST full API provides the necessary back-end infrastructure and functionality depending on the powers granted to create, read, update and delete data in our application.
 
+**Application Repositorie**(https://github.com/401-project-SGON/Code-Academy-Style-App)
+**Trello**(https://trello.com/b/bfU2nGDB/code-academy)
 
 
 ## Environment Tools Used :- 
@@ -33,6 +35,7 @@ This REST full API provides the necessary back-end infrastructure and functional
 The current version of power code application is designed to create, read, update and delete the questions then return the score to user.
 
 This API was designed to be extensible, so that we can add multiple code language courses that supported in the future.
+
 
 ***
 ## Future Releases
@@ -61,17 +64,15 @@ This API is structured on a Model View Controller(MVC) architecture pattern. The
 * The express router middleware provides the base routing capability.
 * A custom handle-errors module implements and extends the http-errors npm middleware package.
 * An auth middleware module leverages two npm modules (bcrypt, jsonwebtoken) and the module to provide user sign-up and user sign-in functionality as well as session authentication/authorization.
+* Oauth, Bearer and access control middleware.
 * The mongoose npm module is used for interaction with the mongo database
-
 
 
 ![](assets/flow.png)
 
-
 Individual resources (user,signin,signup...) have dedicated dynamic models. These models are the interface between the routers and mongo database. The dynamic model take in a request from a route and call it then return a response to the route once a request has been processed in the model.
 
-
-mongoose: The dynamic models leverage the required mongoose client module to create new schemas in the mongo database and to execute CRUD operations on mongo documents. Currently supported resources include:
+mongoose & model: The dynamic models leverage the required mongoose client module to create new schemas in the mongo database and to execute CRUD operations on mongo documents. Currently supported resources include:
 - user
 - editor
 - admin
@@ -79,17 +80,148 @@ mongoose: The dynamic models leverage the required mongoose client module to cre
 - levels
 - questions
 
+![uml]()
 
 
+***
+## DataBase Schema Diagram:
+
+
+### ERD diagram :-
+*** 
 ![](assets/ERD.png)
 
 
+### MVP Schema Diagram :-
+*** 
+![](assets/schema.png)
+
+****
+## Tree of our project 
+
+***
+## Routes :-
+
+### signup route :- 
+
+
+Provide username, password and role also we take the token. This route create a new user by taking a username and password to access our courses and quastion in the request.
+The token will be return just for the user who signin by api/signin route.We will receivd a new token  after signing in to use it for the ather route 
+
+
+```
+router.post('/signup', (req, res) => {
+  new User(req.body).save()
+    .then(userIn => {
+      let token = User.generateToken(userIn);
+      res.status(200).send(token);
+    });
+});
+
+```
+
+### signin route :-  
+
+
+In this route we requierd the needed autharization header for the user, this header have username and password to acheive the right outhanticated, after that we will retarn a new token that will be uesed for user identification. 
+```
+router.post('/signin', auth ,(req, res) => {
+  res.status(200).json(req.token);
+});
+
+```
+
+## Get route :- 
+
+This route used to read the user information thous signin in our application.
+
+```
+router.get('/users', auth, (req, res) => {
+  User.find().then(data=>{
+    res.status(200).json(data);
+  })
+});
+```
+get respons example from our swagger application 
+```
+???????
+```
+***
+
+## CURD 
+
+### Create:POST
+
+In this route we return the all object record in our database as request body after creating the new object they will return the spasific new object then this record will be add to the database.
+
+```
+function create(req,res,next){
+  req.model.create(req.body).then(data=>{
+    res.status(200).json(data)
+  })
+}
+```
+### Update:-PUT
+
+This route tacke the id of the user as a parametre, we will accept the all record including the spasific id that we need to updated as a request body. after that this single object " the record as updataed in our database will be returnd.  
+```
+function update(req,res,next){
+  req.model.update(req.params.id,req.body).then(data=>{
+    res.status(200).json(data)
+  })
+}
+```
+
+### Read / GetOne :-
+
+In this route we take an id as parameter route then we will return a single object record from the database.
+```
+function getOne(req,res,next){
+  req.model.get(req.params.id).then(data=>{
+    res.status(200).json(data)
+  })
+}
+```
+
+### Read / GetAll :- 
+In this route we return an object then we will return all object record from the database.
+
+```
+function getAll(req,res,next){
+
+  req.model.get().then(data=>{
+    res.status(200).json(data)
+  })
+}
+```
+
+
+### Delete :- 
+
+In this route we will take an id for route parameter to delete spasific record,after that it will return item deleted message.
+
+```
+function deleteOne(req,res,next){
+  let mesg = "item deleted"
+  req.model.delete(req.params.id).then(data=>{
+    res.status(200).json(mesg)
+  })
+}
+```
+
+## Group Members:-
+***
+1. Naseem Izzat: (https://github.com/naseem-qa)
+2. Sohad Odtallah Al-Qtaitat: (https://github.com/sohadQtaitat)
+3. Obada Quran: (https://github.com/obadeh)
+4. Goroob Al-Swalqah: (https://github.com/Goorob)
 
 
 
 
 
 
-### ************************************************************************************************************
+
+
 
 
