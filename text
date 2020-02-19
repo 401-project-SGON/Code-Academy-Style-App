@@ -1,0 +1,34 @@
+{"web":{"client_id":"11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com",
+ "project_id":"project-401-268120",
+ "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+ "token_uri":"https://oauth2.googleapis.com/token",
+ "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+ "client_secret":"gGcJYGmQZCwM7MYpHyzY8DVT"}}
+
+
+ https://accounts.google.com/o/oauth2/v2/auth?
+ scope=https://mail.google.com&
+ access_type=offline&
+ include_granted_scopes=true&
+ state=state_parameter_passthrough_value&
+ redirect_uri=http://localhost&
+ response_type=code&
+ client_id=11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com
+
+https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com&as=0ywmrMFUQsixoad90lrlCg&destination=http%3A%2F%2Flocalhost&approval_state=!ChRTbDVzd2lCXzFrenhIWkhlQkd1ZBIfMHp2dGp0blY2cjBZOERFdWhZOThQY19sbkQ5UkJCYw%E2%88%99AJDr988AAAAAXkhAFTGLNRJzoHBWq5AG1UPG4PQ9Xrai&oauthriskyscope=1&xsrfsig=ChkAeAh8Twr69qvgMvurnBJXfHCtKXVFTqgsEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24S'/465
+BXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow
+
+https://accounts.google.com/signin/oauth/error?authError=Cg9pbnZhbGlkX3JlcXVlc3QSckludmFsaWQgcmVzcG9uc2VfdHlwZTogNCAvIHdnR0VfSXdqM0xhVWZkUTg5SUNHd0huU0FvS1U1M0l2MHRJVjNQZjkwWm5QVHZfdXJReDVWVTRFZ2dfQThvSVc5eFROdFpQcW1IZWxGTEM1S3JNNmVmbxo1aHR0cDovL2NvZGUuZ29vZ2xlLmNvbS9hcGlzL2FjY291bnRzL2RvY3MvT0F1dGgyLmh0bWwgkAM%3D&client_id=11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com
+=====================
+ http://localhost/?state=state_parameter_passthrough_value&code=4/wgGE_Iwj3LaUfdQ89ICGwHnSAoKU53Iv0tIV3Pf90ZnPTv_urQx5VU4Egg_A8oIW9xTNtZPqmHelFLC5KrM6efo&scope=https://mail.google.com/
+
+ ===================
+ POST /token HTTP/1.1
+Host: oauth2.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=4/wgGE_Iwj3LaUfdQ89ICGwHnSAoKU53Iv0tIV3Pf90ZnPTv_urQx5VU4Egg_A8oIW9xTNtZPqmHelFLC5KrM6efo&
+client_id=11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com&
+client_secret=gGcJYGmQZCwM7MYpHyzY8DVT&
+redirect_uri=http://localhost&
+grant_type=authorization_code
