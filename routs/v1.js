@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const Quastion = require('../models/qModel')
 const Course = require('../models/course-model.js') 
 const Level = require('../models/level-model.js') 
-
+const oauth = require('../middleware/oauth/oauth.js')
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -29,15 +29,23 @@ router.post('/signup', (req, res) => {
       res.status(200).send(token);
     });
 });
-router.post('/signin', auth ,(req, res) => {
+router.post('/signin', auth() ,(req, res) => {
     // creat token and append to req by basicAuth middleware
   res.status(200).json(req.token);
 });
-router.get('/users', auth, (req, res) => {
+router.get('/users', auth("delete"), (req, res) => {
     // show all users from database
   User.find().then(data=>{
     res.status(200).json(data);
   })
+});
+
+router.get('/oauth', (req,res,next) => {
+  oauth.authorize(req)
+    .then( token => {
+      res.status(200).send(token);
+    })
+    .catch(next);
 });
 
 // load json file
@@ -108,15 +116,5 @@ function deleteOne(req,res,next){
   })
 }
 
-
-
-// router.get('/oauth', oauth ,(req, res) => {
-//   res.status(200).send(req.token);
-
-// });
-
-// router.get('/secret', bearerAuth, (req, res) => {
-//   res.status(200).json(req.user);
-// });
 
 module.exports = router;

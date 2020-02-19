@@ -61,5 +61,20 @@ users.methods.can = function(capability) {
   console.log('capability : ',capability );
   return capabilities[this.role].includes(capability);
 };
+// from oauth
+users.statics.createFromOauth = function (email) {
+  if (!email) { return Promise.reject('Validation Error'); }
+  return this.findOne({ email })
+    .then(user => {
+      if (!user) { throw new Error('User Not Found'); }
+      return user;
+    })
+    .catch(() => {
+      console.log('Creating new user');
+      let username = email;
+      let password = 'none';
+      return this.create({ username, password });
+    });
+};
 
 module.exports = mongoose.model('users', users);
