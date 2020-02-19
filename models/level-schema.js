@@ -10,7 +10,7 @@ const level = mongoose.Schema({
 );
 
 
-level.virtual('quasions', {
+level.virtual('questions', {
 
   ref: 'question',
   localField: 'levelName',
@@ -22,7 +22,7 @@ level.virtual('quasions', {
 level.pre('find', function() {
 
     try {
-      this.populate('quasions');
+      this.populate('questions');
     } catch(e) {
       console.error(e);
     }

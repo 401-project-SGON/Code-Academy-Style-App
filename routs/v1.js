@@ -56,7 +56,7 @@ function getModel(req, res, next) {
     req.model = Level;
     next();
     return;
-    case 'quastion':
+    case 'question':
       req.model = Quastion;
       next();
       return;
@@ -71,7 +71,7 @@ router.param('model', getModel);
 // main routes for get create update delete 
 router.get('/:model/:id',getOne)
 router.get('/:model',getAll)
-router.post('/:model',auth('create'),create)
+router.post('/:model',create)
 router.put('/:model/:id',update)
 router.delete('/:model/:id',deleteOne)
 
