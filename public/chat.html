@@ -63,7 +63,7 @@
             <input type="radio" name="room" value="css" id="css"><label for="css"> css room</label></option>
             <input type="radio" name="room" value="html" id="html"><label for="html"> html room</label></option>
         </div> -->
-    
+
 
 
     </ul>
@@ -82,9 +82,9 @@
                 return false;
             });
             $('#r input').on('change', function () {
-                
-                room= this.value
-                socket.emit('join',room)
+
+                room = this.value
+                socket.emit('join', room)
             }); socket.on('chat message', function (msg) {
                 $('#messages').append($('<li>').text(msg));
                 window.scrollTo(0, document.body.scrollHeight);
