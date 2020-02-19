@@ -5,6 +5,7 @@ require('dotenv').config();
 const server = require('./lib/server.js');
 const mongoose = require('mongoose');
 
+console.log('here');
 
 const options = {
   useNewUrlParser:true,
