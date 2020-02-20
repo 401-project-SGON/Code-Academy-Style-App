@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>POWER CODE</h1>
+
+
+  <main>
+    <a class="google" id="ltuc" href="">log in with google</a>
+    <h2>Courses </h2>
+    <ul>
+      <li><a href="http://localhost:3000/course">javaScript</a></li>
+      <li><a href="http://localhost:3000/course">HTML</a></li>
+      <li><a href="http://localhost:3000/course">CSS</a></li>
+    </ul>
+  </main>
+  <footer>
+    <div style="margin: -204px 18px 0px 490px; ">
+      <iframe src="http://localhost:3001" width="500px" frameborder="0"></iframe>
+    </div>
+  </footer>
+  <script>
+    let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
+    let options = {
+      response_type: 'code',
+      client_id: '11558164755-s2q6qtd874td3boaqfpifc4pa9lsm9aj.apps.googleusercontent.com',
+      scope: 'openid email',
+      redirect_uri: 'http://localhost:3000/oauth',
+      state: 'naseemIzzat',
+      access_type: 'offline',
+    }
+    let QueryString = Object.keys(options).map((key) => {
+      return `${key}=` + encodeURIComponent(options[key]);
+    }).join('&');
+    console.log('naseem', QueryString)
+    let authURL = `${URL}?${QueryString}`;
+    console.log('hima', authURL)
+    let link = document.getElementById('ltuc');
+    link.setAttribute('href', authURL);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script>
+    $.ajax({
+      url: '/data',
+      complete: function (data) {
+        console.log(data);
+      }
+    });</script>
+
+</body>
+
+</html>

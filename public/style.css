@@ -1,0 +1,125 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/* site styles */
+
+h1 {
+    background: black;
+    padding: 30px;
+    font-family: monospace;
+    font-size: 26px;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    font-size: 26px;
+    color: #444;
+    font-family: arial;
+    /* border-bottom: solid 1px black; */
+    margin-bottom: 20px;
+    clear: right;
+    width: 100%;
+    background: #444;
+    color: white;
+    padding: 20px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+ul li {
+    font-family: monospace;
+    padding: 10px;
+    font-size: 22px;
+    margin-bottom: 60px;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 20px 40px;
+    background: black;
+    border-radius: 3px;
+    transition: 350ms all;
+}
+
+ul li a:hover {
+    background: green;
+}
+
+.google {
+    background: green;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: arial;
+    font-size: 20px;
+    float: right;
+    transition: 350ms all;
+    margin-right: -20px;
+}
+
+.google:hover {
+    background: red;
+}
+
+main {
+    font-family: helvetica;
+    width: 960px;
+    margin: 10px auto;
+}
