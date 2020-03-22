@@ -51,6 +51,7 @@ return token;
 };
 
 users.statics.verifyToken = async function(token) {
+  console.log('token : ', token);
 
   let tokenObject = jwt.verify(token, process.env.SECRET);
   console.log('tokenObject : ',tokenObject );

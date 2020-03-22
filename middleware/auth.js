@@ -38,6 +38,7 @@ module.exports = (capability) => {
     }
 
     function bearerAuth(authString) {
+      console.log('authString : ', authString);
       return User.verifyToken(authString)
         .then(user => isAuthenticated(user))
         .catch(errorAuth);
