@@ -14,9 +14,7 @@ const options = {
 };
 
 const options2 ={
-  useNewUrlParser:true,
-  useUnifiedTopology: true 
-
+  useNewUrlParser:true
 }
 
 mongoose.connect(process.env.MONGODB_URI, options2);
