@@ -13,7 +13,13 @@ const options = {
   useUnifiedTopology: true,
 };
 
-mongoose.connect(process.env.MONGODB_URI, options);
+const options2 ={
+  useNewUrlParser:true,
+  useUnifiedTopology: true 
+
+}
+
+mongoose.connect(process.env.MONGODB_URI, options2);
 
 
 
