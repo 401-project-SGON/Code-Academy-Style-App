@@ -14,12 +14,15 @@ const options = {
 };
 
 const options2 ={
+  useCreateIndex: true,
+
+
   useNewUrlParser:true
 }
 
-mongoose.connect(process.env.MONGODB_URI, options2);
+mongoose.connect(process.env.MONGODB_URI, options);
 
 
 
 server.start(process.env.PORT);
-chatServer.start(process.env.PORT2)
+// chatServer.start(process.env.PORT2)

@@ -10,6 +10,9 @@ const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
+  email:{type:String,required:false,unique:false},
+  phone:{type:String,required:false,unique:false},
+  url:{type:String,required:false,unique:false}
 });
 
 users.pre('save', async function() {
@@ -37,12 +40,14 @@ users.methods.comparePassword = function(password) {
 };
 
 users.statics.generateToken = function(user) {
-
 // note that token expire in 15 min 
 
 let userSecInfo = {
   username: user.username,
   capabilities: capabilities[user.role],
+  email:user.email,
+  phone:user.phone,
+  url:user.url
 };
 
 let token = jwt.sign(userSecInfo , process.env.SECRET);

@@ -1,4 +1,7 @@
 const express = require('express');
+// cloudinary
+const cloudinary = require('cloudinary')
+
 const auth = require('../middleware/auth.js');
 const User = require('../users.js');
 const mongoose = require('mongoose')
@@ -7,10 +10,27 @@ const Quastion = require('../models/qModel')
 const Course = require('../models/course-model.js') 
 const Level = require('../models/level-model.js') 
 const oauth = require('../middleware/oauth/oauth.js')
+const formData = require('express-form-data')
+
+
+// cloudinary
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET
+})
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
+router.use(formData.parse())
 
+router.post('/image', (req, res) => {
+  console.log('req.files : ', req.files);
+  const path = req.files[0].path
+  console.log('path : ', path);
+  cloudinary.uploader.upload(path)
+    .then(image => res.status(200).json([image]))
+})
 
 //
 router.get('/data', (req, res) => {
@@ -115,6 +135,8 @@ function deleteOne(req,res,next){
     res.status(200).json(mesg)
   })
 }
+
+
 
 
 module.exports = router;
