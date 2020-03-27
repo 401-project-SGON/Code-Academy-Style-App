@@ -53,7 +53,7 @@ router.post('/signin', auth() ,(req, res) => {
     // creat token and append to req by basicAuth middleware
   res.status(200).json(req.token);
 });
-router.get('/users', auth("delete"), (req, res) => {
+router.get('/users', (req, res) => {
     // show all users from database
   User.find().then(data=>{
     res.status(200).json(data);
