@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 require('./level-schema.js')
 const course = mongoose.Schema({
-
+  overview: { type: String, required: true },
   courseName: { type: String, required: true },
+  questions: { type: Object, required: true },
+
 },
 { toObject: { virtuals: true }, toJSON: { virtuals: true },}
 );

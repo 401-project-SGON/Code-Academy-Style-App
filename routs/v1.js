@@ -6,7 +6,7 @@ const auth = require('../middleware/auth.js');
 const User = require('../users.js');
 const mongoose = require('mongoose')
 // models
-const Quastion = require('../models/qModel')
+const Subject = require('../models/qModel')
 const Course = require('../models/course-model.js') 
 const Level = require('../models/level-model.js') 
 const oauth = require('../middleware/oauth/oauth.js')
@@ -84,8 +84,8 @@ function getModel(req, res, next) {
     req.model = Level;
     next();
     return;
-    case 'question':
-      req.model = Quastion;
+    case 'subject':
+      req.model = Subject;
       next();
       return;
   default:

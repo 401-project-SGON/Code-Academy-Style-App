@@ -3,6 +3,7 @@ require('./qSchema.js')
 const level = mongoose.Schema({
 
   levelName: { type: String, required: true },
+  difficulty:{ type: String, required: true },
   course: { type: String, required: true },
 
 },
@@ -10,7 +11,7 @@ const level = mongoose.Schema({
 );
 
 
-level.virtual('questions', {
+level.virtual('subjects', {
 
   ref: 'question',
   localField: 'levelName',
@@ -22,7 +23,7 @@ level.virtual('questions', {
 level.pre('find', function() {
 
     try {
-      this.populate('questions');
+      this.populate('subjects');
     } catch(e) {
       console.error(e);
     }

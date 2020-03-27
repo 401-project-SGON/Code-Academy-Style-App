@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 require('./level-schema.js')
 const question = mongoose.Schema({
 
-  question: { type: String, required: true },
-  answer: { type: String, required: true },
+  subject: { type: String, required: true },
+  example: { type: String, required: true },
+  explain: { type: String, required: true },
   level:{type:String, required:true},
 },
 );
