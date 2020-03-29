@@ -11,6 +11,7 @@ const Course = require('../models/course-model.js')
 const Level = require('../models/level-model.js') 
 const oauth = require('../middleware/oauth/oauth.js')
 const formData = require('express-form-data')
+const Feedback = require('../models/feedback-model.js')
 
 
 // cloudinary
@@ -32,10 +33,38 @@ router.post('/image', (req, res) => {
     .then(image => res.status(200).json([image]))
 })
 
-//
+// feedback
+router.get('/feedback', (req, res) => {
+  
+
+  Feedback.get(req.params.id).then(data=>{
+    res.status(200).json(data)
+  })
+
+});
+router.post('/feedback', (req, res) => {
+  
+console.log('req.body : ', req.body);
+  Feedback.create(req.body).then(data=>{
+    res.status(201).json(data)
+  })
+
+});
+router.delete('/feedback', (req, res) => {
+  
+  let msg = "item deleted"
+
+  Feedback.delete(req.params.id).then(data=>{
+    res.status(200).json(msg)
+  })
+
+});
+
+///
+
 router.get('/data', (req, res) => {
   
-     res.status(200).json({ "message": 'Hello World' });
+  res.status(200).json({ "message": 'Hello World' });
 
 });
 
@@ -119,7 +148,7 @@ function getAll(req,res,next){
 function create(req,res,next){
 
   req.model.create(req.body).then(data=>{
-    res.status(200).json(data)
+    res.status(201).json(data)
   })
 }
 function update(req,res,next){
