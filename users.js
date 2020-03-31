@@ -70,9 +70,10 @@ users.methods.can = function(capability) {
 // from oauth
 users.statics.createFromOauth = function (userEmail) {
   if (!userEmail) { return Promise.reject('Validation Error'); }
-  return this.findOne({ userEmail })
+  return this.findOne({ email:userEmail })
     .then(user => {
-      // if (!user) { throw new Error('User Not Found'); }
+      if (!user) { throw new Error('User Not Found'); }
+      console.log(' NOT CREATING ');
       return user;
     })
     .catch(() => {
