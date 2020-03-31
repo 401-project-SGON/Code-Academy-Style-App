@@ -72,7 +72,7 @@ users.statics.createFromOauth = function (userEmail) {
   if (!userEmail) { return Promise.reject('Validation Error'); }
   return this.findOne({ userEmail })
     .then(user => {
-      if (!user) { throw new Error('User Not Found'); }
+      // if (!user) { throw new Error('User Not Found'); }
       return user;
     })
     .catch(() => {
