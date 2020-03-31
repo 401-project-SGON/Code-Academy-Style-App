@@ -12,8 +12,8 @@ const authorize = (req) => {
     .send({
       // headers of the request
       code: code,
-      client_id: process.env.CLIENT_ID3,
-      client_secret: process.env.CLIEN_SECRET3,
+      client_id: process.env.CLIENT_ID2,
+      client_secret: process.env.CLIEN_SECRET2,
       redirect_uri: `https://power-code-back-end.herokuapp.com/oauth`,
       grant_type: 'authorization_code',
     })
@@ -37,18 +37,10 @@ const authorize = (req) => {
       return Users.createFromOauth(oauthUser.email); // this leads to the user model page
     })
     .then(actualRealUser => { // actualRealUser is your schema with google sign in information
-      console.log('(5) ALMOST ...', actualRealUser);
 
-     
-      // let userInfo={
-      //   username:actualRealUser.email,
-      //   capabilities:'user',
-      //   email:actualRealUser.email,
-      //   phone:actualRealUser.phone,
-      //   url:actualRealUser.url
-      // }
-      let user = {username:actualRealUser.email}
-      return Users.generateToken(user); // this will give back a token contains just your email address
+      console.log('(5) ALMOST ...', actualRealUser);
+      // let user = {userName:actualRealUser.email}
+      return Users.generateToken(actualRealUser); // this will give back a token contains just your email address
     })
     .catch(error => console.error(error));
 };

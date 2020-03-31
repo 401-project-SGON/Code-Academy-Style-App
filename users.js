@@ -10,9 +10,9 @@ const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
-  email:{type:String,required:false,unique:false},
-  phone:{type:String,required:false,unique:false},
-  url:{type:String,required:false,unique:false}
+  email:{type:String,default:'none',required:false,unique:false},
+  phone:{type:String,default:'none',required:false,unique:false},
+  url:{type:String,default:'https://www.pngitem.com/pimgs/m/111-1114791_male-user-icon-hd-png-download.png',required:false,unique:false}
 });
 
 users.pre('save', async function() {
@@ -68,22 +68,19 @@ users.methods.can = function(capability) {
   return capabilities[this.role].includes(capability);
 };
 // from oauth
-users.statics.createFromOauth = function (email) {
-  if (!email) { return Promise.reject('Validation Error'); }
-  return this.findOne({ email })
+users.statics.createFromOauth = function (userEmail) {
+  if (!userEmail) { return Promise.reject('Validation Error'); }
+  return this.findOne({ userEmail })
     .then(user => {
       if (!user) { throw new Error('User Not Found'); }
       return user;
     })
     .catch(() => {
       console.log('Creating new user');
-      let username = email;
+      let username = userEmail;
       let password = 'none';
-      let role = 'user'
-      let email = email;
-      let phone=''
-      let url = ''
-      return this.create({ username, password,phone,url,role });
+      let email = userEmail;
+      return this.create({ username, password,email });
     });
 };
 
