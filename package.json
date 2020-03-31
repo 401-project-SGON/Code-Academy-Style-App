@@ -36,6 +36,7 @@
     "mongodb-memory-server": "^6.2.4",
     "mongoose": "^5.9.6",
     "morgan": "^1.9.1",
+    "passport": "^0.4.1",
     "socket.io": "^2.3.0",
     "superagent": "^5.2.1",
     "supergoose": "^0.2.6",
