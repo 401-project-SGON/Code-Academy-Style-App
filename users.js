@@ -79,7 +79,11 @@ users.statics.createFromOauth = function (email) {
       console.log('Creating new user');
       let username = email;
       let password = 'none';
-      return this.create({ username, password });
+      let role = 'user'
+      let email = email;
+      let phone=''
+      let url = ''
+      return this.create({ username, password,phone,url,role });
     });
 };
 

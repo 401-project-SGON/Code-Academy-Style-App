@@ -46,12 +46,15 @@ const authorize = (req) => {
       //   phone:user.phone,
       //   url:user.url
       // };
-      // let userInfo={
-      //   username:actualRealUser.email,
-
-      // }
+      let userInfo={
+        username:actualRealUser.email,
+        capabilities:'user',
+        email:actualRealUser.email,
+        phone:actualRealUser.phone,
+        url:actualRealUser.url
+      }
       let user = {username:actualRealUser.email}
-      return Users.generateToken(user); // this will give back a token contains just your email address
+      return Users.generateToken(userInfo); // this will give back a token contains just your email address
     })
     .catch(error => console.error(error));
 };
