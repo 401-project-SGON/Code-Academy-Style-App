@@ -12,8 +12,8 @@ const authorize = (req) => {
     .send({
       // headers of the request
       code: code,
-      client_id: process.env.CLIENT_ID2,
-      client_secret: process.env.CLIEN_SECRET2,
+      client_id: process.env.CLIENT_ID3,
+      client_secret: process.env.CLIEN_SECRET3,
       redirect_uri: `https://power-code-back-end.herokuapp.com/oauth`,
       grant_type: 'authorization_code',
     })
