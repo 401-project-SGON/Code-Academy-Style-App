@@ -38,7 +38,19 @@ const authorize = (req) => {
     })
     .then(actualRealUser => { // actualRealUser is your schema with google sign in information
       console.log('(5) ALMOST ...', actualRealUser);
-      let user = {userName:actualRealUser.email}
+
+      // let userSecInfo = {
+      //   username: user.username,
+      //   capabilities: capabilities[user.role],
+      //   email:user.email,
+      //   phone:user.phone,
+      //   url:user.url
+      // };
+      // let userInfo={
+      //   username:actualRealUser.email,
+
+      // }
+      let user = {username:actualRealUser.email}
       return Users.generateToken(user); // this will give back a token contains just your email address
     })
     .catch(error => console.error(error));
