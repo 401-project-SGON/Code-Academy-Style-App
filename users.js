@@ -10,9 +10,9 @@ const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
-  email:{type:String,default:'none',required:false,unique:false},
-  phone:{type:String,default:'none',required:false,unique:false},
-  url:{type:String,default:'https://www.pngitem.com/pimgs/m/111-1114791_male-user-icon-hd-png-download.png',required:false,unique:false}
+  email:{type:String,default:'none',unique:false},
+  phone:{type:String,default:'none',unique:false},
+  url:{type:String,default:'https://www.pngitem.com/pimgs/m/111-1114791_male-user-icon-hd-png-download.png',unique:false}
 });
 
 users.pre('save', async function() {
