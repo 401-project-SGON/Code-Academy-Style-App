@@ -4,6 +4,7 @@ const course = mongoose.Schema({
   overview: { type: String, required: true },
   courseName: { type: String, required: true },
   questions: { type: Object, required: true },
+  image:{ type: String, required: false }
 
 },
 { toObject: { virtuals: true }, toJSON: { virtuals: true },}

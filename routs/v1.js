@@ -54,15 +54,7 @@ console.log('req.body : ', req.body);
   })
 
 });
-router.delete('/feedback', (req, res) => {
-  
-  let msg = "item deleted"
 
-  Feedback.delete(req.params.id).then(data=>{
-    res.status(200).json(msg)
-  })
-
-});
 
 ///
 
